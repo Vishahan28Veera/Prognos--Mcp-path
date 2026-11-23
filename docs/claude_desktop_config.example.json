@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "prognos": {
+      "command": "/absolute/path/to/prognos-mcp/.venv/bin/prognos-mcp"
+    }
+  }
+}

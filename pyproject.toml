@@ -1,0 +1,23 @@
+[project]
+name = "prognos-mcp"
+version = "0.1.0"
+description = "MCP server that turns EV health predictions into a booked service appointment (mock engine)."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["mcp>=1.2"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+prognos-mcp = "prognos_mcp.server:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

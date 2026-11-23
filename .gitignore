@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Environments
+.venv/
+venv/
+env/
+.env
+.env.*
+!.env.example
+
+# Secrets and credentials (Google OAuth, API keys)
+credentials*.json
+token*.json
+client_secret*.json
+*.pem
+*.key
+
+# Proprietary Prognos code and data: never commit these here
+engine/
+private/
+models/
+*.joblib
+*.pkl
+*.onnx
+data/
+*.mat
+prognos_ml_*.zip
+prognos_synthetic_fleet_*.zip
+ev_health_score*.py
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
