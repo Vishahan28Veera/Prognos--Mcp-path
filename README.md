@@ -5,7 +5,6 @@
 Prognos predicts electric-vehicle faults before they happen. This repository connects those predictions to the apps people already use through the [Model Context Protocol](https://modelcontextprotocol.io). An AI assistant reads the vehicle's health score and remaining useful life, explains the problem in plain language, checks your calendar and the service centre's open slots, and books a visit inside the safe window. It books only after you say yes.
 
 > Built for the **"Make MCP Matter: less magic, more utility"** hackathon track.
-> The Prognos prediction backend was first built for problem KII26101 "Predictive Vehicle Fault Detection" at the Kumaraguru Intra Ideathon 2026, where the team finished runners-up.
 
 > [!IMPORTANT]
 > **This repo uses a mock engine.** The Prognos fault-classification model and health-score engine are the Prognos team's proprietary IP and are **not included** here. [`mock_engine.py`](src/prognos_mcp/mock_engine.py) returns realistic, scripted health scores and RUL with the same output shape. See [Ownership and IP](#ownership-and-ip).
@@ -63,6 +62,7 @@ flowchart LR
     U((Owner)) <--> LLM
 ```
 
+
 ### One conversation, step by step
 
 ```mermaid
@@ -91,7 +91,21 @@ sequenceDiagram
     M-->>A: booking ref BK-0001
 ```
 
+## MCP tools
+
+| Tool | What it does |
+|---|---|
+| `list_vehicles` | The owner's vehicles |
+| `get_vehicle_health` | Score, status, subsystems, suspected or confirmed fault, urgency |
+| `get_remaining_use_time` | RUL in drive cycles with range, plus a days conversion |
+| `explain_fault` | What it is, signs, risk, the fix, what to do until then |
+| `find_free_slots` | Service slots inside the safe window that fit the owner's calendar |
+| `propose_booking` | Creates a proposal and books nothing |
+| `confirm_booking` | Books and adds a calendar event, only with an explicit yes |
+| `get_audit_log` | Everything the assistant booked or declined |
+| `simulate_drive` | Demo only: move a mock vehicle forward N drive cycles |
 ## How the Prognos backend works
+
 
 This section explains the real backend at a conceptual level. Code, trained models, exact weights, severities and tuned thresholds are not published.
 
@@ -193,19 +207,6 @@ Descriptions in this README are conceptual and are given so judges and collabora
 - Every booking or decline is written to an audit log the user can read with `get_audit_log`.
 - With Google Calendar, only free/busy is read, so the assistant knows *when* you're busy but not *what* you're doing.
 
-## MCP tools
-
-| Tool | What it does |
-|---|---|
-| `list_vehicles` | The owner's vehicles |
-| `get_vehicle_health` | Score, status, subsystems, suspected or confirmed fault, urgency |
-| `get_remaining_use_time` | RUL in drive cycles with range, plus a days conversion |
-| `explain_fault` | What it is, signs, risk, the fix, what to do until then |
-| `find_free_slots` | Service slots inside the safe window that fit the owner's calendar |
-| `propose_booking` | Creates a proposal and books nothing |
-| `confirm_booking` | Books and adds a calendar event, only with an explicit yes |
-| `get_audit_log` | Everything the assistant booked or declined |
-| `simulate_drive` | Demo only: move a mock vehicle forward N drive cycles |
 
 ## Roadmap
 
